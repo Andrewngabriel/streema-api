@@ -19,10 +19,10 @@ export default class StreemaAPI {
 
   private domCache: cheerio.Root | null = null
 
-   /**
-   * Obtains the DOM of the Streema website and caches it
-   * @returns {Promise<cheerio.Root>} Cheerio root object
-   */
+  /**
+  * Obtains the DOM of the Streema website and caches it
+  * @returns {Promise<cheerio.Root>} Cheerio root object
+  */
   private async obtainCachedDOM(): Promise<cheerio.Root> {
     if (this.domCache) {
       return this.domCache
@@ -138,7 +138,7 @@ export default class StreemaAPI {
         const location = $(element).find('.item-extra .item-info .location').text().split('\n').map((location: string) => location.trim()).filter((location: string) => location !== '' && location !== ' ').join(',').replace(/,{2,}/g, ',')
         const url = $(element).attr('data-profile-url')
         const thumbnail = $(element).find('.item-logo img')
-  
+
         try {
           const streamURL = await this.obtainStreamURL(url)
           if (url && streamURL) {
@@ -208,59 +208,5 @@ export default class StreemaAPI {
       console.error(e)
       return undefined
     }
-  }
-
-  public async getRegionCountries(region: string) {
-    if (Object.keys(this.REGIONS).includes(region)) {
-      const regionLink = `${this.BASE_URL}/radios/region/${region}`
-      const result = await axios.get(regionLink)
-      const $ = cheerio.load(result.data)
-      const links: (string | undefined)[] = []
-      $('.geo-list ul li a').each(() => { links.push($(this).attr('href')) })
-      return links
-    } else {
-      throw new Error(`Region is invalid.\nSelect one of the following ${this.REGIONS}`)
-    }
-  }
-
-  /**
-   * Queries Streema by given country name
-   * @param {string} country Country name to look up stations by
-   */
-  public async fetchStations(country: unknown) {
-    const pages = await this.fetchPages(country)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const stations = []
-    pages.forEach(async page => {
-      const currentPage = await axios.get(page)
-      const $ = cheerio.load(currentPage.data)
-
-      $('.items-list .item').each(() => {
-        debugger
-        console.log($(this))
-      })
-    })
-  }
-
-  private async fetchPages(country: unknown) {
-    const pages = [`${this.BASE_URL}/radios/country/${country}`]
-    let nextLink = pages[0]
-    while (true) {
-      try {
-        const currentPage = await axios.get(nextLink)
-        const $ = cheerio.load(currentPage.data)
-        const nextPageLink = $("a.next").attr('href')
-        if (nextPageLink) {
-          const link = `${this.BASE_URL}${nextPageLink}`
-          pages.push(link)
-          nextLink = link
-        } else break
-      } catch (e) {
-        // console.log(e)
-        break
-      }
-    }
-
-    return pages
   }
 }

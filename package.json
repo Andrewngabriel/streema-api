@@ -1,6 +1,6 @@
 {
   "name": "streema-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Unofficial Streema API",
   "author": "Andrew Gabriel",
   "license": "MIT",
@@ -16,6 +16,16 @@
       "require": {
         "types": "./dist/cjs/streemaApi.d.ts",
         "default": "./dist/cjs/streemaApi.js"
+      }
+    },
+    "./models": {
+      "import": {
+        "types": "./dist/esm/models.d.ts",
+        "default": "./dist/esm/models.js"
+      },
+      "require": {
+        "types": "./dist/cjs/models.d.ts",
+        "default": "./dist/cjs/models.js"
       }
     },
     "./package.json": "./package.json"
