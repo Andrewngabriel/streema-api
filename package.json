@@ -4,6 +4,9 @@
   "description": "Unofficial Streema API",
   "author": "Andrew Gabriel",
   "license": "MIT",
+  "publishConfig": {
+    "@Andrewngabriel:registry": "https://npm.pkg.github.com"
+  },
   "types": "dist/cjs/streemaApi.d.ts",
   "main": "dist/cjs/streemaApi.js",
   "module": "dist/esm/streemaApi.js",
