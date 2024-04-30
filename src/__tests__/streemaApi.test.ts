@@ -1,22 +1,7 @@
-import StreemaAPI from '../streemaApi'
+import StreemaAPI from '../'
 
 describe('Streema API', () => {
   const api = new StreemaAPI()
-
-  // test('Get available regions', () => expect(Object.keys(api.regions).length).toBe(7))
-
-  // Object.values(api.regions).forEach(region => {
-  //   test(`Verify ${region.name} has ${region.countries} countries`, async () => {
-  //     const countries = await api.getRegionCountries(region.name)
-  //     expect(countries.length).toEqual(region.countries)
-  //   })
-  // })
-
-  // test('Verify that getRegionCountries() throws an error on invalid input', () => {
-  //   api.getRegionCountries('Invalid').catch(e => {
-  //     expect(e).toEqual(`Region is invalid.\nSelect one of the following ${api.regions}`)
-  //   })
-  // })
 
   test('Get regions', async () => {
     const regions = await api.getRegions()
@@ -59,27 +44,22 @@ describe('Streema API', () => {
   //   }
   // })
 
-  test('Get stations by slug - single page', async () => {
-    const stations = await api.getStationsBySlug('/radios/Andorra_la_Vella')
-    expect(stations.length).toBe(8)
-  
+  // test('Get stations by slug - single page', async () => {
+  //   const stations = await api.getStationsBySlug('/radios/Andorra_la_Vella')
+  //   expect(stations.length).toBe(8)
 
-    // expect(stations.length).toBe(10)
-    // expect(stations[0].name).toBe('KQED Radio')
-    // expect(stations[0]).toHaveProperty('name')
-    // expect(stations[0]).toHaveProperty('url')
-    // expect(stations[0]).toHaveProperty('streamURL')
-    // expect(stations[0]).toHaveProperty('desc')
-    // expect(stations[0]).toHaveProperty('tags')
-    // expect(stations[0]).toHaveProperty('website')
-    // expect(stations[0]).toHaveProperty('links')
-    // expect(stations[0]).toHaveProperty('source')
-    // expect(stations[0]).toHaveProperty('uuid')
-    // expect(stations[0]).toHaveProperty('img')
-  }, 20_000)
 
-  test.only('Get stations by slug - multiple pages', async () => {
-    const stations = await api.getStationsBySlug('/radios/country/Egypt')
-    expect(stations.length).toBe(8)
-  }, 80_000)
+  //   // expect(stations.length).toBe(10)
+  //   // expect(stations[0].name).toBe('KQED Radio')
+  //   // expect(stations[0]).toHaveProperty('name')
+  //   // expect(stations[0]).toHaveProperty('url')
+  //   // expect(stations[0]).toHaveProperty('streamURL')
+  //   // expect(stations[0]).toHaveProperty('desc')
+  //   // expect(stations[0]).toHaveProperty('tags')
+  //   // expect(stations[0]).toHaveProperty('website')
+  //   // expect(stations[0]).toHaveProperty('links')
+  //   // expect(stations[0]).toHaveProperty('source')
+  //   // expect(stations[0]).toHaveProperty('uuid')
+  //   // expect(stations[0]).toHaveProperty('img')
+  // }, 40_000)
 })

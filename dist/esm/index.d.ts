@@ -1,5 +1,5 @@
 import { Region, Country, City, Genre, RadioStation } from "./models";
-export default class Index {
+export default class StreemaAPI {
     private readonly BASE_URL;
     readonly REGIONS: {
         North_America: {

@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const followRedirects = __importStar(require("follow-redirects"));
 const cheerio = __importStar(require("cheerio"));
-class Index {
+class StreemaAPI {
     constructor() {
         this.BASE_URL = "https://streema.com";
         this.REGIONS = {
@@ -271,5 +271,5 @@ class Index {
         });
     }
 }
-exports.default = Index;
+exports.default = StreemaAPI;
 //# sourceMappingURL=index.js.map

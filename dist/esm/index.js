@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as followRedirects from 'follow-redirects';
 import * as cheerio from "cheerio";
-export default class Index {
+export default class StreemaAPI {
     BASE_URL = "https://streema.com";
     REGIONS = {
         North_America: { name: 'North_America', countries: 5 },

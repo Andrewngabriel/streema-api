@@ -3,7 +3,7 @@ import * as followRedirects from 'follow-redirects'
 import * as cheerio from "cheerio"
 import { Region, Country, City, Genre, RadioStation, Image } from "./models"
 
-export default class Index {
+export default class StreemaAPI {
   private readonly BASE_URL = "https://streema.com"
   public readonly REGIONS = {
     North_America: { name: 'North_America', countries: 5 },
