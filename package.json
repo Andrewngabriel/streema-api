@@ -32,6 +32,7 @@
   },
   "scripts": {
     "test": "npm run build && jest",
+    "test:coverage": "npm run build && jest --coverage",
     "test:watch": "npm run build && jest --watch",
     "test:watchAll": "npm run build && jest --watchAll",
     "clean": "rm -rf dist",
@@ -40,7 +41,7 @@
     "build:cjs": "tsc -p tsconfig-cjs.json && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
     "rebuild": "npm run clean && npm run build",
     "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+    "lint:fix": "eslint . --ext .js,.ts,.tsx --fix"
   },
   "keywords": [
     "streema",

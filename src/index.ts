@@ -1,11 +1,9 @@
 import axios from "axios"
 import * as followRedirects from 'follow-redirects'
 import * as cheerio from "cheerio"
-import { Region, Country, City, Genre, RadioStation } from "./models"
-// Remove the duplicate import statement for 'cheerio'
-// import cheerio from "cheerio"
+import { Region, Country, City, Genre, RadioStation, Image } from "./models"
 
-export default class StreemaAPI {
+export default class Index {
   private readonly BASE_URL = "https://streema.com"
   public readonly REGIONS = {
     North_America: { name: 'North_America', countries: 5 },
@@ -138,9 +136,10 @@ export default class StreemaAPI {
         const location = $(element).find('.item-extra .item-info .location').text().split('\n').map((location: string) => location.trim()).filter((location: string) => location !== '' && location !== ' ').join(',').replace(/,{2,}/g, ',')
         const url = $(element).attr('data-profile-url')
         const thumbnail = $(element).find('.item-logo img')
-
+        
         try {
           const streamURL = await this.obtainStreamURL(url)
+          const img = await this.obtainStationImage(url)
           if (url && streamURL) {
             stations.push({
               name,
@@ -148,6 +147,8 @@ export default class StreemaAPI {
               genre,
               location,
               url,
+              img,
+              streamURL,
               thumbnail: {
                 url: thumbnail.attr('src'),
                 alt: thumbnail.attr('alt'),
@@ -191,7 +192,7 @@ export default class StreemaAPI {
           const request = protocol.get(streamURL, (response) => {
             response.on('data', () => {
               request.destroy()
-              resolve(url)
+              resolve(streamURL)
             })
 
             response.on('end', () => reject('Stream ended without receiving any data'))
@@ -204,6 +205,32 @@ export default class StreemaAPI {
           })
         })
       } else return undefined
+    } catch (e) {
+      console.error(e)
+      return undefined
+    }
+  }
+
+  private async obtainStationImage(url: string | undefined): Promise<Image | undefined> {
+    if (!url) return undefined
+
+    const transformedUrl = url.replace('/radios/', '/radios/play/')
+    const fetchUrl = `${this.BASE_URL}${transformedUrl}`
+
+    try {
+      const $ = await this.obtainDOM(fetchUrl)
+      const img = $('.song-image img')
+      const src = img.attr('src')
+      const alt = img.attr('alt')
+      const width = img.attr('width')
+      const height = img.attr('height')
+
+      return {
+        url: src,
+        alt,
+        width,
+        height
+      }
     } catch (e) {
       console.error(e)
       return undefined
