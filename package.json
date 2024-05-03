@@ -7,18 +7,18 @@
   "publishConfig": {
     "@Andrewngabriel:registry": "https://npm.pkg.github.com"
   },
-  "types": "dist/cjs/streemaApi.d.ts",
-  "main": "dist/cjs/streemaApi.js",
-  "module": "dist/esm/streemaApi.js",
+  "types": "dist/cjs/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/esm/streemaApi.d.ts",
-        "default": "./dist/esm/streemaApi.js"
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
       },
       "require": {
-        "types": "./dist/cjs/streemaApi.d.ts",
-        "default": "./dist/cjs/streemaApi.js"
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
       }
     },
     "./models": {
