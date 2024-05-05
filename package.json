@@ -19,6 +19,10 @@
       "require": {
         "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
+      },
+      "default": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
       }
     },
     "./models": {
@@ -45,6 +49,14 @@
     "rebuild": "npm run clean && npm run build",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .js,.ts,.tsx --fix"
+  },
+  "homepage": "https://github.com/Andrewngabriel/streema-api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andrewngabriel/streema-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Andrewngabriel/streema-api/issues"
   },
   "keywords": [
     "streema",
