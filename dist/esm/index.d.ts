@@ -1,34 +1,56 @@
 import { Region, Country, City, Genre, RadioStation } from "./models";
+type CallbackFunction = (stations: RadioStation[]) => void;
 export default class StreemaAPI {
     private readonly BASE_URL;
     readonly REGIONS: {
         North_America: {
             name: string;
-            countries: number;
+            countries: {
+                name: string;
+                slug: string;
+            }[];
         };
         Central_America: {
             name: string;
-            countries: number;
+            countries: {
+                name: string;
+                slug: string;
+            }[];
         };
         South_America: {
             name: string;
-            countries: number;
+            countries: {
+                name: string;
+                slug: string;
+            }[];
         };
         Europe: {
             name: string;
-            countries: number;
+            countries: {
+                name: string;
+                slug: string;
+            }[];
         };
         Africa: {
             name: string;
-            countries: number;
+            countries: {
+                name: string;
+                slug: string;
+            }[];
         };
         Asia: {
             name: string;
-            countries: number;
+            countries: {
+                name: string;
+                slug: string;
+            }[];
         };
         Oceania: {
             name: string;
-            countries: number;
+            countries: {
+                name: string;
+                slug: string;
+            }[];
         };
     };
     private domCache;
@@ -66,9 +88,10 @@ export default class StreemaAPI {
     /**
      * Obtains a list of stations by url slug
      * @param slug URL slug to look up stations by
+     * @param callback Optional callback function
      * @returns Promise<RadioStation[]>
      */
-    getStationsBySlug(slug: string): Promise<RadioStation[]>;
+    getStationsBySlug(slug: string, callback?: CallbackFunction): Promise<RadioStation[]>;
     /**
      * Takes a station URL and obtains stream URL then checks whether the stream is working or not
      * @param {string} url Station URL
@@ -77,3 +100,4 @@ export default class StreemaAPI {
     private obtainStreamURL;
     private obtainStationImage;
 }
+export {};
